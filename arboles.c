@@ -82,6 +82,38 @@ int hasPathSum(struct node* node, int sum){
 		return (hasPathSum(node->left, subSum) || hasPathSum(node->right, subSum));
 	}
 }
+
+struct node** treeToList(struct node** root){
+	assert(*root);
+	//si es hoja
+	if(!(*root->left) && !(*root->right)){
+		root->left=root;
+		root->right=root;
+	}
+	else{
+		//NECESITO guardar el padre? no creo
+		//creo temporales que guarden la posicion mas pequeña y la
+		//mas grande, y uno que itere por el arbol
+		struct node* current= root;
+		struct node* pequenio;
+		struct node* grande;
+		//antes ver si llego a una hoja  ???
+		if(!(current->left) && !(current->right))
+			pequenio = current;
+		//trabajar con el padre de la hoja izquierdo y derecho
+		if(!(current->left->left) && !(current->left->right))
+			pequenio=current->left->left;
+			current->left->right=current;
+		if(!(current->right->left) && !(current->right->right))
+			
+			
+		//recorro el arbol
+		treeToList(current->left);
+		treeToList(current->right);
+		//problema, para lista circular si es solo 1 elemento, en recursion va a llegar al caso base y no funciona solo para 1
+	}
+}
+
 // busqueda InOrder: itera sobre el arbol de forma recursiva, para ir a sub--arboles izquierdos al padre y a subarboles derechos para cada subarbol.
 int main(){
 	struct node* node= newNode(5);
